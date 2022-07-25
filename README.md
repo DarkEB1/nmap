@@ -9,15 +9,24 @@ Nmap is a very useful, open source, tool used for port scanning, vulnerability c
 Let's start off with some basic syntax!
 This format is used for most scans performed with Nmap.
 
-    nmap <Scan Type><Options><targe specification> 
+    nmap <Scan Type> <Options> <target specification> 
 
 For the scan type and options - all of them and what they do are listed in the "help" section at the bottom of the README.
   
-EXAMPLES:
-  nmap -v -A scanme.nmap.org
-  nmap -v -sn 192.168.0.0/16 10.0.0.0/8
-  nmap -v -iR 10000 -Pn -p 80
-SEE THE MAN PAGE (http://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES
+### EXAMPLES:
+    nmap -v -A scanme.nmap.org 
+
+This scan would perform a scan with OS detection enabled and increased verbose output on the target "scanme.nmap.org"
+    
+    nmap -v -sn 192.168.0.0/16 10.0.0.0/8\
+    
+This scan would perform a host discovery with port scanning disabled with increased verbose output on the IP's above
+
+    nmap -v -iR 10000 -Pn -p 80
+    
+This scan would perform a port scan with host discovery disabled with increased verbose output on 10000 random hosts scanning on port 80 only.
+
+'''SEE THE MAN PAGE (http://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES'''
 
 
 Now you know what is Nmap Let’s talk about NSE scripts.

@@ -69,7 +69,7 @@ Vulscan is a Nmap Scripting Engine script which helps Nmap to find vulnerabiliti
 
 (Results)
 
-# nmap -sV --script=vulscan/vulscan.nse google.com
+#nmap -sV --script=vulscan/vulscan.nse google.com
 Starting Nmap 7.70 ( https://nmap.org ) at 2020-01-29 20:14 -03
 Nmap scan report for google.com (172.217.165.142)
 Host is up (0.23s latency).
@@ -101,7 +101,7 @@ nmap.org
 Nmap: the Network Mapper - Free Security Scanner
 Nmap Free Security Scanner, Port Scanner, & Network Exploration Tool. Download open source software for Linux, Windows, UNIX, FreeBSD, etc.
     
-Help menu
+#Help menu
 
     Nmap 5.51 ( http://nmap.org )
     Usage: nmap [Scan Type(s)] [Options] {target specification}

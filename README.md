@@ -1,5 +1,5 @@
 
-Basic Syntax – nmap [ <Scan Type> ...] [ <Options> ] { <targe specification> }
+Basic Syntax – nmap <Scan Type><Options><targe specification> 
 
 
   

@@ -1,8 +1,6 @@
 
 Basic Syntax – nmap [ <Scan Type> ...] [ <Options> ] { <targe specification> }
 
-You can type nmap -h for the help menu, there you can see all of the scan types and options.
-
 
   
 EXAMPLES:
@@ -102,6 +100,7 @@ Nmap: the Network Mapper - Free Security Scanner
 Nmap Free Security Scanner, Port Scanner, & Network Exploration Tool. Download open source software for Linux, Windows, UNIX, FreeBSD, etc.
     
 # Help menu
+  Outputted when -h is typed into the console
 
     Nmap 5.51 ( http://nmap.org )
     Usage: nmap [Scan Type(s)] [Options] {target specification}

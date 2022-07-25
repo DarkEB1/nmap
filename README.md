@@ -6,12 +6,10 @@ Welcome! This is a short guide on how to use Nmap and some basic syntax along wi
 
 Nmap is a very useful, open source, tool used for port scanning, vulnerability checking, network mapping and more. This guide will very briefly explain how it can be used.
 
-***
-
 Let's start off with some basic syntax!
 This format is used for most scans performed with Nmap.
 
-  nmap <Scan Type><Options><targe specification> 
+    nmap <Scan Type><Options><targe specification> 
 
 For the scan type and options - all of them and what they do are listed in the "help" section at the bottom of the README.
   

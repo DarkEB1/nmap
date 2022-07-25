@@ -26,8 +26,9 @@ This scan would perform a host discovery with port scanning disabled with increa
     
 This scan would perform a port scan with host discovery disabled with increased verbose output on 10000 random hosts scanning on port 80 only.
 
-'''SEE THE MAN PAGE (http://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES'''
+**SEE THE MAN PAGE (http://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES**
 
+## NSE Scripting
 
 Now you know what is Nmap Let’s talk about NSE scripts.
 

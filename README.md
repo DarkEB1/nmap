@@ -3,6 +3,104 @@ Basic Syntax – nmap [ <Scan Type> ...] [ <Options> ] { <targe specification> }
 
 You can type nmap -h for the help menu, there you can see all of the scan types and options.
 
+
+  
+EXAMPLES:
+  nmap -v -A scanme.nmap.org
+  nmap -v -sn 192.168.0.0/16 10.0.0.0/8
+  nmap -v -iR 10000 -Pn -p 80
+SEE THE MAN PAGE (http://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES
+
+
+Now you know what is Nmap Let’s talk about NSE scripts.
+
+What is NSE Scripts?
+The Nmap Scripting Engine (NSE) is one of Nmap’s most powerful and flexible features. It allows users to write (and share) simple scripts to automate a wide variety of networking tasks. Those scripts are then executed in parallel with the speed and efficiency you expect from Nmap.
+
+    Now, What are some good NSE scripts you must use while looking for vulnerabilities or even recon.
+    
+    1. dns-brute.nse
+    Attempts to enumerate DNS hostnames by brute force guessing of common subdomains.
+
+    The dns-brute script tries to find as many subdomains as the host is being tested using the most frequently used subdomain names.
+
+(Result)
+
+nmap -p 80 --script dns-brute.nse vulnweb.com
+Starting Nmap 6.46 ( http://nmap.org ) at 2014-09-24 19:58 EST
+Nmap scan report for vulnweb.com (176.28.50.165)
+Host is up (0.34s latency).
+rDNS record for 176.28.50.165: rs202995.rs.hosteurope.de
+PORT   STATE SERVICE
+80/tcp open  http
+Host script results:
+| dns-brute: 
+|   DNS Brute-force hostnames: 
+|     admin.vulnweb.com - 176.28.50.165
+|     firewall.vulnweb.com - 176.28.50.165
+|_    dev.vulnweb.com - 176.28.50.165
+Nmap done: 1 IP address (1 host up) scanned in 28.41 seconds
+2. http-enum.nse
+Enumerates directories used by popular web applications and servers.
+
+This parses a fingerprint file that’s similar in format to the Nikto Web application scanner. This script, however, takes it one step further by building in advanced pattern matching as well as having the ability to identify specific versions of Web applications.
+
+(Result)
+nmap.org
+Nmap: the Network Mapper - Free Security Scanner
+Nmap Free Security Scanner, Port Scanner, & Network Exploration Tool. Download open source software for Linux, Windows, UNIX, FreeBSD, etc.
+
+nmap -sV --script=http-enum 
+Interesting ports on test.skullsecurity.org (208.81.2.52): PORT   STATE SERVICE REASON 80/tcp open  http    syn-ack | http-enum: |   /icons/: Icons and images |   /images/: Icons and images |   /robots.txt: Robots file |   /sw/auth/login.aspx: Citrix WebTop |   /images/outlook.jpg: Outlook Web Access |   /nfservlets/servlet/SPSRouterServlet/: netForensics |_  /nfservlets/servlet/SPSRouterServlet/: netForensics
+3. ssh-brute.nse
+Simply putting this script Performs brute-force password guessing against ssh servers
+
+(Result)
+
+nmap -p 22 --script ssh-brute --script-args userdb=users.lst,passdb=pass.lst  --script-args ssh-brute.timeout=4s 
+22/ssh open  ssh 
+|  ssh-brute:
+|  Accounts 
+|  username:password 
+|  Statistics 
+|_   Performed 32 guesses in 25 seconds.
+4. vulscan.nse
+Vulscan is a Nmap Scripting Engine script which helps Nmap to find vulnerabilities on targets based on services and version detections to estimate vulnerabilities depending on the software listening on the target.
+
+(Results)
+
+# nmap -sV --script=vulscan/vulscan.nse google.com
+Starting Nmap 7.70 ( https://nmap.org ) at 2020-01-29 20:14 -03
+Nmap scan report for google.com (172.217.165.142)
+Host is up (0.23s latency).
+And this will give you all the possible vulnerability on the given domain.
+
+5. smb-brute.nse
+Attempts to guess username/password combinations over SMB, storing discovered combinations for use in other scripts. Every attempt will be made to get a valid list of users and to verify each username before actually using them.
+
+This script just tries to brute force local account against smb services.
+
+(results)
+
+#nmap --script smb-brute.nse -p445 
+sudo nmap -sU -sS --script smb-brute.nse -p U:137,T:139 
+Host script results: 
+| smb-brute: 
+|   bad name:test => Valid credentials 
+|   consoletest:test => Valid credentials, password must be changed at next logon 
+|   guest: => Valid credentials, account disabled 
+|   mixcase:BuTTeRfLY1 => Valid credentials 
+|   test:password1 => Valid credentials, account expired 
+|   this:password => Valid credentials, account cannot log in at current time 
+|   thisisaverylong:password => Valid credentials 
+|   thisisaverylongname:password => Valid credentials 
+|   thisisaverylongnamev:password => Valid credentials 
+|_  web:TeSt => Valid credentials, account disabled
+So, These are some NSE scripts that are widely used by the community.
+nmap.org
+Nmap: the Network Mapper - Free Security Scanner
+Nmap Free Security Scanner, Port Scanner, & Network Exploration Tool. Download open source software for Linux, Windows, UNIX, FreeBSD, etc.
+    
 Help menu
 
     Nmap 5.51 ( http://nmap.org )
@@ -120,99 +218,3 @@ Help menu
     --unprivileged: Assume the user lacks raw socket privileges
     -V: Print version number
     -h: Print this help summary page.
-  
-EXAMPLES:
-  nmap -v -A scanme.nmap.org
-  nmap -v -sn 192.168.0.0/16 10.0.0.0/8
-  nmap -v -iR 10000 -Pn -p 80
-SEE THE MAN PAGE (http://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES
-
-
-Now you know what is Nmap Let’s talk about NSE scripts.
-
-What is NSE Scripts?
-The Nmap Scripting Engine (NSE) is one of Nmap’s most powerful and flexible features. It allows users to write (and share) simple scripts to automate a wide variety of networking tasks. Those scripts are then executed in parallel with the speed and efficiency you expect from Nmap.
-
-    Now, What are some good NSE scripts you must use while looking for vulnerabilities or even recon.
-    
-    1. dns-brute.nse
-    Attempts to enumerate DNS hostnames by brute force guessing of common subdomains.
-
-    The dns-brute script tries to find as many subdomains as the host is being tested using the most frequently used subdomain names.
-
-(Result)
-
-nmap -p 80 --script dns-brute.nse vulnweb.com
-Starting Nmap 6.46 ( http://nmap.org ) at 2014-09-24 19:58 EST
-Nmap scan report for vulnweb.com (176.28.50.165)
-Host is up (0.34s latency).
-rDNS record for 176.28.50.165: rs202995.rs.hosteurope.de
-PORT   STATE SERVICE
-80/tcp open  http
-Host script results:
-| dns-brute: 
-|   DNS Brute-force hostnames: 
-|     admin.vulnweb.com - 176.28.50.165
-|     firewall.vulnweb.com - 176.28.50.165
-|_    dev.vulnweb.com - 176.28.50.165
-Nmap done: 1 IP address (1 host up) scanned in 28.41 seconds
-2. http-enum.nse
-Enumerates directories used by popular web applications and servers.
-
-This parses a fingerprint file that’s similar in format to the Nikto Web application scanner. This script, however, takes it one step further by building in advanced pattern matching as well as having the ability to identify specific versions of Web applications.
-
-(Result)
-nmap.org
-Nmap: the Network Mapper - Free Security Scanner
-Nmap Free Security Scanner, Port Scanner, & Network Exploration Tool. Download open source software for Linux, Windows, UNIX, FreeBSD, etc.
-
-nmap -sV --script=http-enum 
-Interesting ports on test.skullsecurity.org (208.81.2.52): PORT   STATE SERVICE REASON 80/tcp open  http    syn-ack | http-enum: |   /icons/: Icons and images |   /images/: Icons and images |   /robots.txt: Robots file |   /sw/auth/login.aspx: Citrix WebTop |   /images/outlook.jpg: Outlook Web Access |   /nfservlets/servlet/SPSRouterServlet/: netForensics |_  /nfservlets/servlet/SPSRouterServlet/: netForensics
-3. ssh-brute.nse
-Simply putting this script Performs brute-force password guessing against ssh servers
-
-(Result)
-
-nmap -p 22 --script ssh-brute --script-args userdb=users.lst,passdb=pass.lst  --script-args ssh-brute.timeout=4s 
-22/ssh open  ssh 
-|  ssh-brute:
-|  Accounts 
-|  username:password 
-|  Statistics 
-|_   Performed 32 guesses in 25 seconds.
-4. vulscan.nse
-Vulscan is a Nmap Scripting Engine script which helps Nmap to find vulnerabilities on targets based on services and version detections to estimate vulnerabilities depending on the software listening on the target.
-
-(Results)
-
-# nmap -sV --script=vulscan/vulscan.nse google.com
-Starting Nmap 7.70 ( https://nmap.org ) at 2020-01-29 20:14 -03
-Nmap scan report for google.com (172.217.165.142)
-Host is up (0.23s latency).
-And this will give you all the possible vulnerability on the given domain.
-
-5. smb-brute.nse
-Attempts to guess username/password combinations over SMB, storing discovered combinations for use in other scripts. Every attempt will be made to get a valid list of users and to verify each username before actually using them.
-
-This script just tries to brute force local account against smb services.
-
-(results)
-
-#nmap --script smb-brute.nse -p445 
-sudo nmap -sU -sS --script smb-brute.nse -p U:137,T:139 
-Host script results: 
-| smb-brute: 
-|   bad name:test => Valid credentials 
-|   consoletest:test => Valid credentials, password must be changed at next logon 
-|   guest: => Valid credentials, account disabled 
-|   mixcase:BuTTeRfLY1 => Valid credentials 
-|   test:password1 => Valid credentials, account expired 
-|   this:password => Valid credentials, account cannot log in at current time 
-|   thisisaverylong:password => Valid credentials 
-|   thisisaverylongname:password => Valid credentials 
-|   thisisaverylongnamev:password => Valid credentials 
-|_  web:TeSt => Valid credentials, account disabled
-So, These are some NSE scripts that are widely used by the community.
-nmap.org
-Nmap: the Network Mapper - Free Security Scanner
-Nmap Free Security Scanner, Port Scanner, & Network Exploration Tool. Download open source software for Linux, Windows, UNIX, FreeBSD, etc.

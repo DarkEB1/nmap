@@ -1,6 +1,6 @@
 # A Short Guide to NMAP and NSE Scripting
 
-Welcome! This is a short guide on how to use Nmap and some basic syntax along with a collection of useful NSE scripts.
+Welcome! This is a short guide on how to use Nmap and some basic syntax along with a collection of useful NSE scripts
 
 ---
 

@@ -50,7 +50,7 @@ _Port Specification_
 
 _Service and Version Detection_
 |Switch|Example|Description|
-|---=--------------------|-------------------------------------------------------------|------------------------------------------------------------------------------|
+|-----------------------|-------------------------------------------------------------|------------------------------------------------------------------------------|
 |-sV|nmap 192.168.1.1 -sV|Attempts to determine the version of the service running on port|
 |-sV –version-intensity|	nmap 192.168.1.1 -sV –version-intensity 8	|Intensity level 0 to 9. Higher number increases possibility of correctness|
 |-sV –version-light|nmap 192.168.1.1 -sV –version-light	|Enable light mode. Lower possibility of correctness. Faster|

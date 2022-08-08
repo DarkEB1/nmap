@@ -124,39 +124,46 @@ _Firewall / IDS Evasion and Spoofing_
  
 _Example IDS Evasion command_
 
-`nmap -f -t 0 -n -Pn –data-length 200 -D
-192.168.1.101,192.168.1.102,192.168.1.103,192.168.1.23 192.168.1.1`
+`nmap -f -t 0 -n -Pn –data-length 200 -D`
+`192.168.1.101,192.168.1.102,192.168.1.103,192.168.1.23 192.168.1.1`
 
- Output
-Switch	Example	Description
--oN	nmap 192.168.1.1 -oN normal.file	Normal output to the file normal.file
--oX	nmap 192.168.1.1 -oX xml.file	XML output to the file xml.file
--oG	nmap 192.168.1.1 -oG grep.file	Grepable output to the file grep.file
--oA	nmap 192.168.1.1 -oA results	Output in the three major formats at once
--oG –	nmap 192.168.1.1 -oG –	Grepable output to screen. -oN -, -oX – also usable
-–append-output	nmap 192.168.1.1 -oN file.file –append-output	Append a scan to a previous scan file
--v	nmap 192.168.1.1 -v	Increase the verbosity level (use -vv or more for greater effect)
--d	nmap 192.168.1.1 -d	Increase debugging level (use -dd or more for greater effect)
-–reason	nmap 192.168.1.1 –reason	Display the reason a port is in a particular state, same output as -vv
-–open	nmap 192.168.1.1 –open	Only show open (or possibly open) ports
-–packet-trace	nmap 192.168.1.1 -T4 –packet-trace	Show all packets sent and received
-–iflist	nmap –iflist	Shows the host interfaces and routes
-–resume	nmap –resume results.file	Resume a scan
-Helpful Nmap Output examples
-Command	Description
-nmap -p80 -sV -oG – –open 192.168.1.1/24 | grep open	Scan for web servers and grep to show which IPs are running web servers
-nmap -iR 10 -n -oX out.xml | grep “Nmap” | cut -d ” ” -f5 > live-hosts.txt	Generate a list of the IPs of live hosts
-nmap -iR 10 -n -oX out2.xml | grep “Nmap” | cut -d ” ” -f5 >> live-hosts.txt	Append IP to the list of live hosts
-ndiff scanl.xml scan2.xml	Compare output from nmap using the ndif
-xsltproc nmap.xml -o nmap.html	Convert nmap xml files to html files
-grep ” open ” results.nmap | sed -r ‘s/ +/ /g’ | sort | uniq -c | sort -rn | less	Reverse sorted list of how often ports turn up
- Miscellaneous Options
-Switch	Example	Description
--6	nmap -6 2607:f0d0:1002:51::4	Enable IPv6 scanning
--h	nmap -h	nmap help screen
- Other Useful Nmap Commands
-Command	Description
-nmap -iR 10 -PS22-25,80,113,1050,35000 -v -sn	Discovery only on ports x, no port scan
-nmap 192.168.1.1-1/24 -PR -sn -vv	Arp discovery only on local network, no port scan
-nmap -iR 10 -sn -traceroute	Traceroute to random targets, no port scan
-nmap 192.168.1.1-50 -sL –dns-server 192.168.1.1	Query the Internal DNS for hosts, list targets only
+_Output_
+|Switch|	Example	|Description|
+|----------------|-------------------------------------------|-----------------------------------------------------------------------------------------|
+|-oN	|nmap 192.168.1.1 -oN normal.file	|Normal output to the file normal.file|
+|-oX	|nmap 192.168.1.1 -oX xml.file	|XML output to the file xml.file|
+|-oG	|nmap 192.168.1.1 -oG grep.file	|Grepable output to the file grep.file|
+|-oA	|nmap 192.168.1.1 -oA results	|Output in the three major formats at once|
+|-oG –	|nmap 192.168.1.1 -oG –	|Grepable output to screen. -oN -, -oX – also usable|
+|–append-output	|nmap 192.168.1.1 -oN file.file –append-output	|Append a scan to a previous scan file|
+|-v	|nmap 192.168.1.1 -v	|Increase the verbosity level (use -vv or more for greater effect)|
+|-d	|nmap 192.168.1.1 -d	|Increase debugging level (use -dd or more for greater effect)|
+|–reason	|nmap 192.168.1.1 –reason	|Display the reason a port is in a particular state, same output as -vv|
+|–open	|nmap 192.168.1.1 –open	|Only show open (or possibly open) ports|
+|–packet-trace	|nmap 192.168.1.1 -T4 –packet-trace	|Show all packets sent and received|
+|–iflist	|nmap –iflist	|Shows the host interfaces and routes|
+|–resume	|nmap –resume results.file	|Resume a scan|
+ 
+_Helpful Nmap Output examples_
+|Command|	Description|
+|------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+|`nmap -p80 -sV -oG – –open 192.168.1.1/24 | grep open`	|Scan for web servers and grep to show which IPs are running web servers|
+|`nmap -iR 10 -n -oX out.xml | grep “Nmap” | cut -d ” ” -f5 > live-hosts.txt`|	Generate a list of the IPs of live hosts|
+|`nmap -iR 10 -n -oX out2.xml | grep “Nmap” | cut -d ” ” -f5 >> live-hosts.txt`|	Append IP to the list of live hosts|
+|`ndiff scanl.xml scan2.xml`	|Compare output from nmap using the ndif|
+|`xsltproc nmap.xml -o nmap.html`	|Convert nmap xml files to html files|
+|`grep ” open ” results.nmap | sed -r ‘s/ +/ /g’ | sort | uniq -c | sort -rn | less`|	Reverse sorted list of how often ports turn up|
+ 
+_Miscellaneous Options_
+|Switch	|Example|	Description|
+|----|------------------------------|-----------------------|
+|-6	|nmap -6 2607:f0d0:1002:51::4	|Enable IPv6 scanning|
+|-h	|nmap -h	|nmap help screen|
+ 
+_Other Useful Nmap Commands_
+|Command	|Description|
+|---------------------------------------------------|---------------------------------------------------------------------|
+|nmap -iR 10 -PS22-25,80,113,1050,35000 -v -sn	|Discovery only on ports x, no port scan|
+|nmap 192.168.1.1-1/24 -PR -sn -vv	|Arp discovery only on local network, no port scan|
+|nmap -iR 10 -sn -traceroute	|Traceroute to random targets, no port scan|
+|nmap 192.168.1.1-50 -sL –dns-server 192.168.1.1	|Query the Internal DNS for hosts, list targets only|

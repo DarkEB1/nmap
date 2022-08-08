@@ -48,14 +48,16 @@ _Port Specification_
 |-p-65535	|nmap 192.168.1.1 -p-65535	|Leaving off initial port in range makes the scan start at port 1|
 |-p0-	|nmap 192.168.1.1 -p0-	|Leaving off end port in range makes the scan go through to port 65535|
 
- Service and Version Detection
-Switch	Example	Description
--sV	nmap 192.168.1.1 -sV	Attempts to determine the version of the service running on port
--sV –version-intensity	nmap 192.168.1.1 -sV –version-intensity 8	Intensity level 0 to 9. Higher number increases possibility of correctness
--sV –version-light	nmap 192.168.1.1 -sV –version-light	Enable light mode. Lower possibility of correctness. Faster
--sV –version-all	nmap 192.168.1.1 -sV –version-all	Enable intensity level 9. Higher possibility of correctness. Slower
--A	nmap 192.168.1.1 -A	Enables OS detection, version detection, script scanning, and traceroute
- OS Detection
+_Service and Version Detection_
+|Switch|Example|Description|
+|---=--------------------|-------------------------------------------------------------|------------------------------------------------------------------------------|
+|-sV|nmap 192.168.1.1 -sV|Attempts to determine the version of the service running on port|
+|-sV –version-intensity|	nmap 192.168.1.1 -sV –version-intensity 8	|Intensity level 0 to 9. Higher number increases possibility of correctness|
+|-sV –version-light|nmap 192.168.1.1 -sV –version-light	|Enable light mode. Lower possibility of correctness. Faster|
+|-sV –version-all|nmap 192.168.1.1 -sV –version-all	|Enable intensity level 9. Higher possibility of correctness. Slower|
+|-A|nmap 192.168.1.1 -A	|Enables OS detection, version detection, script scanning, and traceroute|
+
+OS Detection
 Switch	Example	Description
 -O	nmap 192.168.1.1 -O	Remote OS detection using TCP/IP stack fingerprinting
 -O –osscan-limit	nmap 192.168.1.1 -O –osscan-limit	If at least one open and one closed TCP port are not found it will not try OS detection against host

@@ -57,32 +57,37 @@ _Service and Version Detection_
 |-sV –version-all|nmap 192.168.1.1 -sV –version-all	|Enable intensity level 9. Higher possibility of correctness. Slower|
 |-A|nmap 192.168.1.1 -A	|Enables OS detection, version detection, script scanning, and traceroute|
 
-OS Detection
-Switch	Example	Description
--O	nmap 192.168.1.1 -O	Remote OS detection using TCP/IP stack fingerprinting
--O –osscan-limit	nmap 192.168.1.1 -O –osscan-limit	If at least one open and one closed TCP port are not found it will not try OS detection against host
--O –osscan-guess	nmap 192.168.1.1 -O –osscan-guess	Makes Nmap guess more aggressively
--O –max-os-tries	nmap 192.168.1.1 -O –max-os-tries 1	Set the maximum number x of OS detection tries against a target
--A	nmap 192.168.1.1 -A	Enables OS detection, version detection, script scanning, and traceroute
- Timing and Performance
-Switch	Example	Description
--T0
-nmap 192.168.1.1 -T0	Paranoid (0) Intrusion Detection System evasion
--T1	nmap 192.168.1.1 -T1	Sneaky (1) Intrusion Detection System evasion
--T2	nmap 192.168.1.1 -T2	Polite (2) slows down the scan to use less bandwidth and use less target machine resources
--T3	nmap 192.168.1.1 -T3	Normal (3) which is default speed
--T4	nmap 192.168.1.1 -T4	Aggressive (4) speeds scans; assumes you are on a reasonably fast and reliable network
--T5	nmap 192.168.1.1 -T5	Insane (5) speeds scan; assumes you are on an extraordinarily fast network
-Switch	Example input	Description
-–host-timeout <time>	1s; 4m; 2h	Give up on target after this long
-–min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout <time>	1s; 4m; 2h	Specifies probe round trip time
-–min-hostgroup/max-hostgroup <size<size>	50; 1024	Parallel host scan group sizes
-–min-parallelism/max-parallelism <numprobes>	10; 1	Probe parallelization
-–scan-delay/–max-scan-delay <time>	20ms; 2s; 4m; 5h	Adjust delay between probes
-–max-retries <tries>	3	Specify the maximum number of port scan probe retransmissions
-–min-rate <number>	100	Send packets no slower than <numberr> per second
-–max-rate <number>	100	Send packets no faster than <number> per second
- NSE Scripts
+_OS Detection_
+|Switch|	Example|	Description|
+|-----------------|------------------------------------------|------------------------------------------------------------------------------------------------|
+|-O	|nmap 192.168.1.1 -O	|Remote OS detection using TCP/IP stack fingerprinting|
+|-O –osscan-limit	|nmap 192.168.1.1 -O –osscan-limit	|If at least one open and one closed TCP port are not found it will not try OS detection against host|
+|-O –osscan-guess	|nmap 192.168.1.1 -O –osscan-guess	|Makes Nmap guess more aggressively|
+|-O –max-os-tries	|nmap 192.168.1.1 -O –max-os-tries 1|	Set the maximum number x of OS detection tries against a target|
+|-A	|nmap 192.168.1.1 -A	|Enables OS detection, version detection, script scanning, and traceroute|
+
+_Timing and Performance_
+|Switch|	Example|	Description|
+|---|----------------------|-------------------------------------------------------------------------------------------|
+|-T0| nmap 192.168.1.1 -T0	|Paranoid (0) Intrusion Detection System evasion|
+|-T1|	nmap 192.168.1.1 -T1	|Sneaky (1) Intrusion Detection System evasion|
+|-T2|	nmap 192.168.1.1 -T2	|Polite (2) slows down the scan to use less bandwidth and use less target machine resources|
+|-T3|	nmap 192.168.1.1 -T3	|Normal (3) which is default speed|
+|-T4|	nmap 192.168.1.1 -T4	|Aggressive (4) speeds scans; assumes you are on a reasonably fast and reliable network|
+|-T5|	nmap 192.168.1.1 -T5	|Insane (5) speeds scan; assumes you are on an extraordinarily fast network|
+
+|Switch|	Example input|	Description|
+|-----------------------------------------------------------|-------------------------|-------------------------------------------------------------|
+|–host-timeout <time>|	1s; 4m; 2h	|Give up on target after this long|
+|–min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout <time>|	1s; 4m; 2h	|Specifies probe round trip time|
+|–min-hostgroup/max-hostgroup <size<size>|	50; 1024	|Parallel host scan group sizes|
+|–min-parallelism/max-parallelism <numprobes>|	10; 1	|Probe parallelization|
+|–scan-delay/–max-scan-delay <time>|	20ms; 2s; 4m; 5h	|Adjust delay between probes|
+|–max-retries <tries>|	3	|Specify the maximum number of port scan probe retransmissions|
+|–min-rate <number>|	100	|Send packets no slower than <numberr> per second|
+|–max-rate <number>|	100	|Send packets no faster than <number> per second|
+ 
+_NSE Scripts_
 Switch	Example	Description
 -sC	nmap 192.168.1.1 -sC	Scan with default NSE scripts. Considered useful for discovery and safe
 –script default	nmap 192.168.1.1 –script default	Scan with default NSE scripts. Considered useful for discovery and safe
